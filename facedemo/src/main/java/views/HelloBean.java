@@ -1,8 +1,10 @@
 package views;
 
-
-import jakarta.inject.Named;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+
 
 @Named
 @RequestScoped
@@ -18,12 +20,15 @@ public class HelloBean {
         this.userInput = userInput;
     }
 
-    public String getMessage()
-    {
-        return "Hello," + userInput;
+    public String getMessage(){
+        return  "Hello, " + userInput;
+
     }
 
-    public String onSubmit() {
+    public String onSubmit(){
+
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("FacesMessage from java part"+ userInput));
+        //userInput = null;
         return null;
     }
 }
